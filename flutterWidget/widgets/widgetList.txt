@@ -1,0 +1,285 @@
+All flutter widget list :- https://docs.flutter.dev/development/ui/widgets
+1. MaterialApp(); // it is used for app setup
+2. Scaffold(); // Each screen parent Widget
+   a. AppBar();
+
+3. Column(
+   children:[
+
+   ]
+  );
+
+4. Row(
+   children:[
+
+   ]
+);
+
+5. ElevatedButton(
+   onPressed:(){
+
+   },
+   child:Text("button Title")
+);
+
+6. Container(
+   child:Text("container"),
+)
+
+7. Center(
+   child:Text("center the content"),
+)
+8. Buttons 
+  1. ElevatedButton(
+    style:BottonStyle()
+  )
+
+  2. TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor : Colors.black,
+              ),
+              onPressed: () {},
+              child: const Text("Text Button"),
+            )
+
+  3. OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.black,
+                side: const BorderSide(
+                  color: Colors.green
+                )
+              ),
+              onPressed: (() {
+              
+            }), 
+            child: const Text("Outlined Button"),
+            )
+
+      4. OutlinedButton.icon(
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.black,
+                side: const BorderSide(
+                  color: Colors.green
+                )
+              ),
+              onPressed: (() {
+              
+            }), 
+           label: const Text("Outlined Button"),
+           icon: const Icon(Icons.home_max_outlined),
+            )
+      5. ElevatedButton.icon(
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.black,
+                side: const BorderSide(
+                  color: Colors.green
+                )
+              ),
+              onPressed: (() {
+              
+            }), 
+           label: const Text("Outlined Button"),
+           icon: const Icon(Icons.home_max_outlined),
+            )
+      6.  TextButton.icon(
+              style: TextButton.styleFrom(
+                foregroundColor : Colors.black,
+              ),
+              onPressed: () {},
+              label: const Text("Text Button"),
+              icon: const Icon(Icons.access_alarm),
+            )
+      7.  IconButton(
+              onPressed: () {},
+             icon: const Icon(Icons.home_max_outlined),
+             )
+       
+  9. InkWell ===> it is like Pressable in react-native ===> InkWell(
+              onTap: () {
+                
+              },
+              child: const Text("Inkwell"),
+          )
+
+10. Flexible
+
+11. Expanded
+
+12. Stack
+
+13. Card
+       Card(
+              elevation: 2,
+              shape:
+               RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+              child: Image.network(
+                "https://imgd-ct.aeplcdn.com/370x208/n/cw/ec/106257/venue-exterior-right-front-three-quarter-2.jpeg?isig=0&q=75",
+                width: 200,
+                height: 200,
+                ),
+             )
+
+14. ListView -> scrollable list 
+
+15 ListTile
+
+16. GridView ->
+
+17. GridTile
+
+18. Image
+
+19. Icon
+
+20. GestureDetector
+
+
+===================================================================================
+# styling Widgets 
+
+1. Text(
+   style: TextStyle(
+                fontSize: 26
+              ),
+   textAlign: TextAlign.center,
+) 
+
+2. Button Style 
+   first Method => by using ButtonStyle class
+
+   ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.yellow),
+          foregroundColor: MaterialStateProperty.all(Colors.black),
+          padding:MaterialStateProperty.all(
+            const EdgeInsets.symmetric(
+            vertical: 20,
+            horizontal: 16
+            )
+            ) 
+        ),
+        onPressed: onPressed,
+        child: const Text("Click Me!"),
+      )
+
+   Second way => since Each Button is having styleFrom from static method wich internally return the object of Button Style 
+   ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.green,
+          foregroundColor: Colors.white,
+          padding:const EdgeInsets.all(16),
+        ),
+        onPressed: onPressed,
+        child: const Text("Click Me!"),
+      )
+
+  styling container :
+
+        Container(
+              padding:const EdgeInsets.all(2),
+              width: double.infinity,
+              margin: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.black38,
+                border:Border.all(
+                  color: Colors.black,
+                  width: 2,
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(16))
+              ),
+              child: Text(
+                '$_count',
+                style: const TextStyle(fontSize: 26),
+                textAlign: TextAlign.center,
+              ),
+            ) 
+
+   Giving Border 
+
+     1. Giving Border to singleSide
+    border: Border(
+                  bottom:BorderSide(
+                  color: Colors.red,
+                  width: 2
+                  ) 
+              )  
+      2. Give Border to all sides
+             border:Border.all(
+                  color: Colors.black,
+                  width: 2,
+                )  
+                
+  Giving borderRadius 
+   borderRadius: const BorderRadius.all(Radius.circular(16))        
+=====================================================================================
+# Notes :-
+1. Passing callback function in onther component
+import 'package:flutter/material.dart';
+
+class CustomButton extends StatelessWidget {
+  final VoidCallback onPressed; // callback function without any arguments and void return type
+  final Function sum; // it can take arguments and have some return type
+
+  const CustomButton(this.onPressed, this.sum, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: const Text("Click Me!"),
+      ),
+    );
+  }
+}
+
+2. Mapping Lists to Widgets 
+class _App extends StatefulWidget {
+  _App({super.key});
+  @override
+  State<_App> createState() => _AppState();
+}
+
+class _AppState extends State<_App> {
+  var _count = 0;
+  var users = ["Ram", "Sita"];
+  void _setCount() {
+    setState(() {
+      _count += 1;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("Flutter Widget"),
+        ),
+        body: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.all(16),
+              child: Text(
+                '$_count',
+                style: const TextStyle(fontSize: 26),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            CustomButton(
+              _setCount,
+              () {},
+            ),
+            ...users.map((e) => Text(e)), // <=======
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+3. The "null" Value & Null Safety
+ The initial value of the variable decleared with var is null 
+ To tell flutter any value is not null we are using ! mark , since flutter >= 2.12.0 is having null Safety on so in background it is checking the null safety  
+
