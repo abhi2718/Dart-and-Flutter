@@ -13,7 +13,7 @@ class CustomButton extends StatelessWidget {
        padding: const EdgeInsets.all(16),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.green,
+          backgroundColor: Theme.of(context).primaryColorDark,
           foregroundColor: Colors.white,
           padding:const EdgeInsets.all(16),
         ),

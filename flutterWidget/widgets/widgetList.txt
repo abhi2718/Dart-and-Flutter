@@ -133,7 +133,135 @@ All flutter widget list :- https://docs.flutter.dev/development/ui/widgets
 
 20. GestureDetector
 
+21. SingleChildScrollView(
 
+  ) 
+  // making whole page scrollable
+   body:SingleChildScrollView(
+          child:  Column(
+          children: []
+          ),
+        )
+
+   //  when we want to use SingleChildScrollView inside any container than
+    we should set the heigt of container for example :
+        Container(
+              height: 50,
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  ...users.map((e) => Text(e)),
+                  ...users.map((e) => Text(e)),
+                  ...users.map((e) => Text(e)),
+                ],)
+              ),
+            )
+
+22. ListView
+
+        Container(
+                color: Colors.amber,
+                alignment: Alignment.center,
+                height: 50,
+                width: double.infinity,
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return Text(
+                      users[index],
+                      textAlign: TextAlign.center,
+                    );
+                  },
+                  itemCount: users.length,
+                ),
+              )
+
+  23. TextField() :
+
+      TextField(
+                  keyboardType: TextInputType.text,
+                  // onSubmitted called when done button from keyboard is clicked 
+                  onSubmitted: (value) {
+                    print(value);
+                  },
+                  controller: _textFieldController,
+                  decoration: InputDecoration(
+                    // enabled: false, // it will disable the text field
+                    labelText: "Email Address",
+                    hintText: "abhiwebdev2718@gmail.com",
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        _setCount(_textFieldController.text);
+                      },
+                      child: const Icon(Icons.email_outlined),
+                    ),
+                    disabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.green,
+                      width: 2,
+                    )), // when text field is disabled i.e enabled: false
+                    enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Color.fromARGB(221, 173, 137, 137),
+                      width: 2,
+                    )), // when textField is enable i.e enabled: true bydefault it is true
+                    focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.blue,
+                      width: 2,
+                    ) // when inputBox receive focous (when user clicks)
+                        ),
+                    focusedErrorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.red,
+                        width: 2,
+                      ),
+                    ),
+                    errorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.red,
+                        width: 2,
+                      ),
+                    ),
+                  ),
+                )
+
+24.  FloatingActionButton :
+       Scaffold(
+        appBar: AppBar(
+          title: const Text("Flutter Widget"),
+          actions: [
+           IconButton(onPressed: () {
+             
+           }, icon:  Icon(
+              Icons.add,
+            ),
+            )
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(onPressed: () {
+          
+        },
+        child: Icon(
+          Icons.add
+        ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        )
+25. Bottom Modal Sheet :
+
+ void openModalBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+        isDismissible: true,
+        enableDrag: true,
+        context: context,
+        builder: (_) {
+          return (Column(
+            children: const [Text("Modal Bottom Sheet")],
+          ));
+        });
+  }
+
+26. Adding theme and using it 
+  
 ===================================================================================
 # styling Widgets 
 
