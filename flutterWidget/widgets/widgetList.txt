@@ -261,7 +261,97 @@ All flutter widget list :- https://docs.flutter.dev/development/ui/widgets
   }
 
 26. Adding theme and using it 
-  
+   MaterialApp(
+        theme: ThemeData(primarySwatch: Colors.green),
+        home: const _App(),
+      )
+
+    Accessing color from theme :
+     style: ElevatedButton.styleFrom(
+          backgroundColor: Theme.of(context).primaryColorDark,
+          foregroundColor: Colors.white,
+          padding:const EdgeInsets.all(16),
+        )
+27.  Adding custom fonts :- https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/learn/lecture/14951060#overview
+  steps:
+ 1. download the google font put inside assets/fonts folder 
+ 2. add in pubspec.yaml file like this
+   fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Bold.ttf
+          weight: 700
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand-Regular.ttf
+        - asset: assets/fonts/Quicksand-Light.ttf
+        - asset: assets/fonts/Quicksand-Bold.ttf
+          weight: 700
+    3. tell to material app to use the custom font as default font
+    MaterialApp(
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+          fontFamily: "Quicksand"
+          ),
+        home: const _App(),
+      )
+28. AppBar title text theme settings
+ MaterialApp(
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+          fontFamily: "Quicksand",
+          appBarTheme: AppBarTheme(
+            titleTextStyle: ThemeData.light()
+                .textTheme
+                .copyWith(
+                  headline6: const TextStyle(
+                    fontFamily: "OpenSans",
+                    fontSize: 20,
+                  ),
+                )
+                .headline6,
+          ),
+        ),
+        home: const _App(),
+      )
+
+29.  Setting Up Text Theme 
+ThemeData(
+          primarySwatch: Colors.green,
+          fontFamily: "Quicksand",
+          textTheme: ThemeData.light()
+                .textTheme
+                .copyWith(
+                  titleMedium: const TextStyle(
+                    fontFamily: "OpenSans",
+                    fontSize: 16,
+                    color: Colors.red
+                  ),
+                ),
+          appBarTheme: AppBarTheme(
+            titleTextStyle: ThemeData.light()
+                .textTheme
+                .copyWith(
+                  headline6: const TextStyle(
+                    fontFamily: "OpenSans",
+                    fontSize: 20,
+                  ),
+                )
+                .headline6,
+          ),
+        )
+  ===> Accessing textTheme -> Theme.of(context).textTheme.titleMedium
+
+30 ==> We learn in theming to set global them for :-
+        1. primarySwatch
+        2. SecondaryColor -> the color used by floatingActionButton
+
+        3. fontFamily -> global FontFamily 
+        4. Setting up AppBarTheme -> (titleTextTheme)
+        5. FontTheme -> global FontTheme and using them
+
+        for more refrence see :- https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/learn/lecture/14951060#overview
 ===================================================================================
 # styling Widgets 
 

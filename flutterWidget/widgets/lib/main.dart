@@ -1,9 +1,34 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import './button.dart';
 
 void main() => runApp(
       MaterialApp(
-        theme: ThemeData(primarySwatch: Colors.green),
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+          fontFamily: "Quicksand",
+          textTheme: ThemeData.light()
+                .textTheme
+                .copyWith(
+                  titleMedium: const TextStyle(
+                    fontFamily: "OpenSans",
+                    fontSize: 16,
+                    color: Colors.red
+                  ),
+                ),
+          appBarTheme: AppBarTheme(
+            titleTextStyle: ThemeData.light()
+                .textTheme
+                .copyWith(
+                  headline6: const TextStyle(
+                    fontFamily: "OpenSans",
+                    fontSize: 20,
+                  ),
+                )
+                .headline6,
+          ),
+        ),
         home: const _App(),
       ),
     );
@@ -70,8 +95,8 @@ class _AppState extends State<_App> {
                   ),
                   borderRadius: const BorderRadius.all(Radius.circular(16))),
               child: Text(
-                '$_count',
-                style: const TextStyle(fontSize: 26),
+                _count,
+                style: Theme.of(context).textTheme.titleMedium,
                 textAlign: TextAlign.center,
               ),
             ),
