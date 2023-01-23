@@ -352,6 +352,94 @@ ThemeData(
         5. FontTheme -> global FontTheme and using them
 
         for more refrence see :- https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/learn/lecture/14951060#overview
+        Updated Text Theme Properties
+In the previous lecture, you learned about setting text themes.
+
+With the latest version of Flutter, some theme identifiers changed.
+
+display4 => headline1;
+display3 => headline2;
+display2 => headline3;
+display1 => headline4;
+headline => headline5;
+title    => headline6; // used in previous lecture
+subhead  => subtitle1;
+subtitle => subtitle2;
+body2    => bodyText1; // will be used in future lectures
+body     => bodyText2; // will be used in future lectures
+In case the textTheme doesn't work on the appBarTheme, change the code from
+
+appBarTheme: AppBarTheme(
+  textTheme: ThemeData.light().textTheme.copyWith(...)
+)
+to
+
+appBarTheme: AppBarTheme(
+  titleTextStyle: TextStyle(
+    fontFamily: 'OpenSans',
+    fontSize: 20,
+    fontWeight: FontWeight.bold
+  )
+)
+
+31.       Flexible(
+                  fit: FlexFit.tight,
+                  child:Container(
+                  color:Colors.blue,
+                  child: const Text('Text3'),
+                ),
+              )
+
+32. Expanded is like Flexible with FlexFit.tight ==>
+         Expanded(
+                  flex:2,
+                  child:Container(
+                  color:Colors.blue,
+                  child: const Text('Text3'),
+                ),
+              )
+33.    CircleAvatar(
+              radius: 100,
+              child:Container()
+              )
+
+ 34.  FittedBox
+        SizedBox(
+              width: 100,
+              height: 100,
+                  child:FittedBox(
+                    child: Image.network(
+                      "https://imgd-ct.aeplcdn.com/370x208/n/cw/ec/106257/venue-exterior-right-front-three-quarter-2.jpeg?isig=0&q=75",
+                      ),
+                  ),
+                )
+35. Padding(
+    padding:
+    child:
+)
+
+36 .  
+     ListTile(
+                  leading: CircleAvatar(
+                    child: Text('leading'),
+                  ),
+                  title: Text("title"),
+                  subtitle: Text("subtitle"),
+                  trailing: Text("trailing"),
+                )
+37.
+final dimension = MediaQuery.of(context).size;
+    print(dimension.width);
+    print(dimension.height);
+  
+    height in percentage =  MediaQuery.of(context).size  * .4 ==> 40% height
+
+    final Orientation deviceOrientation = MediaQuery.of(context).orientation;
+     // Orientation is enum 
+     print(deviceOrientation == Orientation.portrait);
+
+     // Height of statusbar ==> MediaQuery.of(context).padding.top
+    // Appbar height ===> final appBarHeight =  AppBar().preferredSize.height
 ===================================================================================
 # styling Widgets 
 

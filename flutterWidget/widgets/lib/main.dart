@@ -8,15 +8,10 @@ void main() => runApp(
         theme: ThemeData(
           primarySwatch: Colors.green,
           fontFamily: "Quicksand",
-          textTheme: ThemeData.light()
-                .textTheme
-                .copyWith(
-                  titleMedium: const TextStyle(
-                    fontFamily: "OpenSans",
-                    fontSize: 16,
-                    color: Colors.red
-                  ),
-                ),
+          textTheme: ThemeData.light().textTheme.copyWith(
+                titleMedium: const TextStyle(
+                    fontFamily: "OpenSans", fontSize: 16, color: Colors.red),
+              ),
           appBarTheme: AppBarTheme(
             titleTextStyle: ThemeData.light()
                 .textTheme
@@ -63,6 +58,14 @@ class _AppState extends State<_App> {
   final _textFieldController = TextEditingController(text: "Ram");
   @override
   Widget build(BuildContext context) {
+    final dimension = MediaQuery.of(context).size;
+    final deviceOrientation = MediaQuery.of(context).orientation;
+    // print(dimension.width);
+    // print(dimension.height);
+    // print(deviceOrientation == Orientation.portrait);
+    // print(MediaQuery.of(context).padding.top);
+    // final appBarHeight = AppBar().preferredSize.height;
+    // print(appBarHeight);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Flutter Widget"),
@@ -180,9 +183,7 @@ class _AppState extends State<_App> {
               child: TextField(
                 keyboardType: TextInputType.text,
                 // onSubmitted called when done button from keyboard is clicked
-                onSubmitted: (value) {
-                  print(value);
-                },
+                onSubmitted: (value) {},
                 controller: _textFieldController,
                 decoration: InputDecoration(
                   // enabled: false, // it will disable the text field
@@ -200,10 +201,11 @@ class _AppState extends State<_App> {
                     width: 2,
                   )), // when text field is disabled i.e enabled: false
                   enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                    color: Color.fromARGB(221, 173, 137, 137),
-                    width: 2,
-                  )), // when textField is enable i.e enabled: true bydefault it is true
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(221, 173, 137, 137),
+                      width: 2,
+                    ),
+                  ), // when textField is enable i.e enabled: true bydefault it is true
                   focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
                     color: Colors.blue,
@@ -224,6 +226,52 @@ class _AppState extends State<_App> {
                   ),
                 ),
               ),
+            ),
+            Row(
+              children: [
+                Flexible(
+                  fit: FlexFit.tight,
+                  child: Container(
+                    color: Colors.blue,
+                    child: const Text('Text1'),
+                  ),
+                ),
+                Flexible(
+                  fit: FlexFit.tight,
+                  flex: 2,
+                  child: Container(
+                    color: Colors.red,
+                    child: const Text('Text2'),
+                  ),
+                ),
+                Flexible(
+                  fit: FlexFit.tight,
+                  child: Container(
+                    color: Colors.blue,
+                    child: const Text('Text3'),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              width: 100,
+              height: 100,
+              child: FittedBox(
+                child: Image.network(
+                  "https://imgd-ct.aeplcdn.com/370x208/n/cw/ec/106257/venue-exterior-right-front-three-quarter-2.jpeg?isig=0&q=75",
+                ),
+              ),
+            ),
+            const ListTile(
+              leading: CircleAvatar(
+                child: Text('leading'),
+              ),
+              title: Text("title"),
+              subtitle: Text("subtitle"),
+              trailing: Text("trailing"),
             )
           ],
         ),
