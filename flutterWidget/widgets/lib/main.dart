@@ -1,32 +1,38 @@
-import 'dart:ui';
+import 'dart:isolate';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import './button.dart';
 
-void main() => runApp(
-      MaterialApp(
-        theme: ThemeData(
-          primarySwatch: Colors.green,
-          fontFamily: "Quicksand",
-          textTheme: ThemeData.light().textTheme.copyWith(
-                titleMedium: const TextStyle(
-                    fontFamily: "OpenSans", fontSize: 16, color: Colors.red),
-              ),
-          appBarTheme: AppBarTheme(
-            titleTextStyle: ThemeData.light()
-                .textTheme
-                .copyWith(
-                  headline6: const TextStyle(
-                    fontFamily: "OpenSans",
-                    fontSize: 20,
-                  ),
-                )
-                .headline6,
-          ),
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+  runApp(
+    MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        fontFamily: "Quicksand",
+        textTheme: ThemeData.light().textTheme.copyWith(
+              titleMedium: const TextStyle(
+                  fontFamily: "OpenSans", fontSize: 16, color: Colors.red),
+            ),
+        appBarTheme: AppBarTheme(
+          titleTextStyle: ThemeData.light()
+              .textTheme
+              .copyWith(
+                headline6: const TextStyle(
+                  fontFamily: "OpenSans",
+                  fontSize: 20,
+                ),
+              )
+              .headline6,
         ),
-        home: const _App(),
       ),
-    );
+      home: const _App(),
+    ),
+  );
+}
 
 class _App extends StatefulWidget {
   const _App();
@@ -60,6 +66,8 @@ class _AppState extends State<_App> {
   Widget build(BuildContext context) {
     final dimension = MediaQuery.of(context).size;
     final deviceOrientation = MediaQuery.of(context).orientation;
+    final isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     // print(dimension.width);
     // print(dimension.height);
     // print(deviceOrientation == Orientation.portrait);
@@ -272,6 +280,54 @@ class _AppState extends State<_App> {
               title: Text("title"),
               subtitle: Text("subtitle"),
               trailing: Text("trailing"),
+            ),
+            Container(
+              width: 300,
+              height: 600,
+              color: Colors.blue,
+              child: LayoutBuilder(
+                builder: (ctx, constraints) {
+                  final parentContainerHeight = constraints.maxHeight;
+                  final parentContainerWidth = constraints.maxWidth;
+                  return Column(
+                    children: [
+                      Container(
+                        width: parentContainerWidth,
+                        height: parentContainerHeight * 0.6,
+                        color: Colors.purple,
+                        child: const Text("box with 60% of height"),
+                      ),
+                      Container(
+                        width: parentContainerWidth,
+                        height: parentContainerHeight * 0.2,
+                        color: const Color.fromARGB(255, 113, 68, 121),
+                        child: const Text("box with 20% of height"),
+                      ),
+                      Container(
+                        width: parentContainerWidth,
+                        height: parentContainerHeight * 0.1,
+                        color: const Color.fromARGB(255, 81, 68, 121),
+                        child: const Text("box with 10% of height"),
+                      ),
+                      Container(
+                        width: parentContainerWidth,
+                        height: parentContainerHeight * 0.05,
+                        color: Colors.blue,
+                        child: const Text("box with 5% of height"),
+                      ),
+                      Container(
+                        width: parentContainerWidth,
+                        height: parentContainerHeight * 0.05,
+                        color: const Color.fromARGB(255, 80, 83, 86),
+                        child: const Text("box with 5% of height"),
+                      )
+                    ],
+                  );
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 50,
             )
           ],
         ),

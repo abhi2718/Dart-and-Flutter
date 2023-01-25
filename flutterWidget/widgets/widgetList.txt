@@ -440,6 +440,70 @@ final dimension = MediaQuery.of(context).size;
 
      // Height of statusbar ==> MediaQuery.of(context).padding.top
     // Appbar height ===> final appBarHeight =  AppBar().preferredSize.height
+   // is app is in landScape ====>   final isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
+38. LayoutBuilder ===> layoutBuilder give the dynamic height of parent container , we can use to render different component with respect to screen size
+
+      Container(
+              width: 300,
+              height: 600,
+              color: Colors.blue,
+              child: LayoutBuilder(
+                builder: (ctx, constraints) {
+                  final parentContainerHeight = constraints.maxHeight;
+                  final parentContainerWidth = constraints.maxWidth;
+                  return Column(
+                    children: [
+                        Container(
+                          width: parentContainerWidth,
+                          height: parentContainerHeight * 0.6,
+                          color: Colors.purple,
+                          child: const Text("box with 60% of height"),
+                        ),
+                         Container(
+                          width: parentContainerWidth,
+                          height: parentContainerHeight * 0.2,
+                          color: const Color.fromARGB(255, 113, 68, 121),
+                          child: const Text("box with 20% of height"),
+                        ),
+                         Container(
+                          width: parentContainerWidth,
+                          height: parentContainerHeight * 0.1,
+                          color: const Color.fromARGB(255, 81, 68, 121),
+                          child: const Text("box with 10% of height"),
+                        ),
+                        Container(
+                          width: parentContainerWidth,
+                          height: parentContainerHeight * 0.05,
+                          color: Colors.blue,
+                          child: const Text("box with 5% of height"),
+                        ),
+                        Container(
+                          width: parentContainerWidth,
+                          height: parentContainerHeight * 0.05,
+                          color: const Color.fromARGB(255, 80, 83, 86),
+                          child: const Text("box with 5% of height"),
+                        )
+                    ],
+                  );
+                },
+              ),
+            )
+
+39. Setting app only for portrait  mode 
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+  runApp(
+    MaterialApp()
+    );
+}
+
+40. Switch() widget to show toggle button 
+
+41. Preventing TextField from overlapping softKeyboard ==> lecture no 128 ===> https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/learn/lecture/15033684#overview
 ===================================================================================
 # styling Widgets 
 
