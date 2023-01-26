@@ -1,7 +1,7 @@
-import 'dart:isolate';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
 import './button.dart';
 
 void main() {
@@ -74,24 +74,7 @@ class _AppState extends State<_App> {
     // print(MediaQuery.of(context).padding.top);
     // final appBarHeight = AppBar().preferredSize.height;
     // print(appBarHeight);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Flutter Widget"),
-        actions: [
-          IconButton(
-            onPressed: () => openModalBottomSheet(context),
-            icon: const Icon(
-              Icons.add,
-            ),
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      body: SingleChildScrollView(
+    final body = SingleChildScrollView(
         child: Column(
           children: [
             Container(
@@ -168,7 +151,7 @@ class _AppState extends State<_App> {
               label: const Text("Outlined Button"),
               icon: const Icon(Icons.home_max_outlined),
             ),
-            IconButton(
+           Platform.isIOS? Container() : IconButton(
               onPressed: () {},
               icon: const Icon(Icons.home_max_outlined),
             ),
@@ -328,10 +311,66 @@ class _AppState extends State<_App> {
             ),
             const SizedBox(
               height: 50,
-            )
+            ),
+            Switch.adaptive(value: true, onChanged: (value) {}),
+            Platform.isIOS
+                ? const Text("Platform is IOS")
+                : const Text("Platform is android")
           ],
         ),
+      );
+    if(Platform.isIOS){
+      return (
+        CupertinoPageScaffold(
+          navigationBar: CupertinoNavigationBar(
+            middle: Text("IOS Style",style: Theme.of(context).textTheme.bodyMedium,),
+            trailing: GestureDetector(
+              onTap: () {
+                
+              },
+              child: const Icon(Icons.add),
+            ),
+            ),
+          child: SafeArea(child: Column(
+            children: [
+              Text("CupertinoPageScaffold",style: Theme.of(context).textTheme.bodyLarge,),
+              ElevatedButton(onPressed: () {
+                
+              }, child: const Text("Elevated Button"),
+              ),
+              CupertinoButton(
+                color: Colors.black,
+                child: const Text("Elevated Button"), 
+                onPressed: () {
+              }),
+              const CupertinoTextField(
+                placeholder: "Email",
+              )
+
+            ],
+          ),
+          )
+        )
+      );
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Flutter Widget"),
+        actions: [
+          IconButton(
+            onPressed: () => openModalBottomSheet(context),
+            icon: const Icon(
+              Icons.add,
+            ),
+          )
+        ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      body:body ,
     );
   }
 }

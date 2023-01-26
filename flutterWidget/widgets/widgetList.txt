@@ -502,8 +502,48 @@ void main() {
 }
 
 40. Switch() widget to show toggle button 
+   The adaptive constructor is used to show ios switch on ios and android switch on android
+  Switch.adaptive(value: true, onChanged: (value) {
+              
+  }) 
 
 41. Preventing TextField from overlapping softKeyboard ==> lecture no 128 ===> https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/learn/lecture/15033684#overview
+
+42. Finding Plateform 
+  import 'dart:io'; // dart:io package provide Plateform class to check Plateform
+   example : ===>  Platform.isIOS ? const Text("Platform is IOS") :
+             const Text("Platform is android") 
+
+43. Using cupertino IOS Widget : https://docs.flutter.dev/development/ui/widgets/cupertino
+
+To useCupertino IOS Widget do following :-
+import 'package:flutter/cupertino.dart';
+
+ if(Platform.isIOS){
+      return (
+        CupertinoPageScaffold(
+          navigationBar: CupertinoNavigationBar(
+            middle: Text("IOS Style",style: Theme.of(context).textTheme.bodyMedium,),
+            ),
+          child: Column(
+            children: [
+              SizedBox(height: 200,),
+              Text("CupertinoPageScaffold",style: Theme.of(context).textTheme.bodyLarge,)
+            ],
+          )
+        )
+      );
+    }
+
+44. CupertinoButton
+      CupertinoButton(child: const Text("Elevated Button"),
+       onPressed: () {
+                
+          }),
+45. CupertinoTextField
+      const CupertinoTextField(
+          placeholder: "Email",
+          )
 ===================================================================================
 # styling Widgets 
 
