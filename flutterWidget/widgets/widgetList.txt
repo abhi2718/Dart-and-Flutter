@@ -693,3 +693,42 @@ class _AppState extends State<_App> {
  The initial value of the variable decleared with var is null 
  To tell flutter any value is not null we are using ! mark , since flutter >= 2.12.0 is having null Safety on so in background it is checking the null safety  
 
+
+4. Three tree of flutter 
+1. Widget Tree ----> Set configuration of widget
+2. Element Tree ----> conect widget and render tree , manage state , update render tree when widget tree chage 
+3. Render Tree --->  Render the widget
+
+5. const constructure ----> If the widget is stateless and its all Properties are final than make its constructor as const consture and use it , it will prevent the widget rebuild
+
+Widget Lifecycle
+1. constructor of widget
+2. createState
+3. constructor of state 
+4. init
+5. build 
+
+6. didUpdateWidget(oldWidget){
+  // when widget got updated it is called
+}
+7. dispose
+
+6. App Lifecycle 
+class _AppState extends State<_App> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(state) {
+    print(state);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+  }
