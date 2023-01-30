@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import './button.dart';
+import './screens/second_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,7 +59,7 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(state) {
-    print(state);
+    // print(state);
   }
 
   @override
@@ -335,7 +336,17 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
           Switch.adaptive(value: true, onChanged: (value) {}),
           Platform.isIOS
               ? const Text("Platform is IOS")
-              : const Text("Platform is android")
+              : const Text("Platform is android"),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) {
+                  return const SecondScreen();
+                }),
+              );
+            },
+            child: const Text("Go To Second Screen"),
+          )
         ],
       ),
     );

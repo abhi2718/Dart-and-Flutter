@@ -544,6 +544,13 @@ import 'package:flutter/cupertino.dart';
       const CupertinoTextField(
           placeholder: "Email",
           )
+46. Creating a Grid & Working with Linear Gradients :-
+https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/learn/lecture/15033850#overview
+
+47. Inkwell(
+  splashColor : Color of wave
+  borderRadius : BorderRadius.circular(16)
+)
 ===================================================================================
 # styling Widgets 
 
@@ -732,3 +739,25 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
     super.dispose();
   }
   }
+
+
+  while creatingListView always set key 
+   key type :-
+   1. UniqueKey();
+   2. ValueKey();
+
+   use value key with ListTile
+
+# Navigation :-
+
+Navigation without RouteTable
+       ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) {
+                  return const SecondScreen();
+                }),
+              );
+            },
+            child: const Text("Go To Second Screen"),
+        )
