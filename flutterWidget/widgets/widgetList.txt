@@ -761,3 +761,17 @@ Navigation without RouteTable
             },
             child: const Text("Go To Second Screen"),
         )
+
+# Setting up route table 
+  use initalRoute argument to load initial page 
+   routes: {
+        '/' : (context) => const _App(),
+        '/secondScreen' : (context) => const SecondScreen()
+      }
+
+# Using pushNamed and Passing data from one screen to other 
+
+final arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+    var name = arguments['name']!;
+    var email = arguments['email']!;

@@ -31,7 +31,10 @@ void main() {
               .headline6,
         ),
       ),
-      home: const _App(),
+      routes: {
+        '/' : (context) => const _App(),
+        '/secondScreen' : (context) => const SecondScreen()
+      },
     ),
   );
 }
@@ -339,11 +342,13 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
               : const Text("Platform is android"),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) {
-                  return const SecondScreen();
-                }),
-              );
+              Navigator.of(context).pushNamed(
+                '/secondScreen',
+                arguments: {
+                  "name":"Abhishek Singh",
+                  "email":"abhishek@gmail.com"
+                }
+                );
             },
             child: const Text("Go To Second Screen"),
           )
