@@ -770,8 +770,89 @@ Navigation without RouteTable
       }
 
 # Using pushNamed and Passing data from one screen to other 
+ ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed('/secondScreen', arguments: {
+                "name": "Abhishek Singh",
+                "email": "abhishek@gmail.com"
+              });
+            },
+            child: const Text("Go To Second Screen"),
+          )
 
+# Accessing arguments on Second Screen          
 final arguments =
         ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     var name = arguments['name']!;
     var email = arguments['email']!;
+
+# onGenerateRoute is used to handle the dynamic generated route
+onGenerateRoute: (settings) {
+        print(settings.arguments);
+        print(settings.name);
+        return MaterialPageRoute(builder: (_) => const SecondScreen());
+      },
+    )
+
+# When any page is not found 
+ onUnknownRoute: (settings) {
+        print(settings.name);
+        print("Unknown");
+        return MaterialPageRoute(builder: (_) => const SecondScreen());
+      },
+
+# Top TabBar 
+
+import 'package:flutter/material.dart';
+class TopTabScreen extends StatefulWidget {
+  const TopTabScreen({super.key});
+  @override
+  State<TopTabScreen> createState() => _TopTabScreenState();
+}
+
+class _TopTabScreenState extends State<TopTabScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: const TabBar(tabs: [
+            Tab(
+              icon: Icon(Icons.clean_hands),
+              text: "Screen1",
+            ),
+            Tab(
+              icon: Icon(Icons.wallet),
+              text: "Screen2",
+            )
+          ],)
+        ),
+        body: const TabBarView(children: [
+          Screen1(),
+          Screen2()
+        ]),
+      ),
+    );
+  }
+}
+
+class Screen1 extends StatelessWidget {
+  const Screen1({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(child: Text("screen1")),
+    );
+  }
+}
+
+class Screen2 extends StatelessWidget {
+  const Screen2({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(child: Text("screen2")),
+    );
+  }
+}

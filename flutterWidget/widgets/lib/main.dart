@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import './button.dart';
 import './screens/second_screen.dart';
+import './screens/top_tab_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,8 +33,18 @@ void main() {
         ),
       ),
       routes: {
-        '/' : (context) => const _App(),
-        '/secondScreen' : (context) => const SecondScreen()
+        '/': (context) => const _App(),
+        '/secondScreen': (context) => const TopTabScreen()
+      },
+      onGenerateRoute: (settings) {
+        print(settings.arguments);
+        print(settings.name);
+        return MaterialPageRoute(builder: (_) => const SecondScreen());
+      },
+      onUnknownRoute: (settings) {
+        print(settings.name);
+        print("Unknown");
+        return MaterialPageRoute(builder: (_) => const SecondScreen());
       },
     ),
   );
@@ -342,13 +353,10 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
               : const Text("Platform is android"),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(
-                '/secondScreen',
-                arguments: {
-                  "name":"Abhishek Singh",
-                  "email":"abhishek@gmail.com"
-                }
-                );
+              Navigator.of(context).pushNamed('/secondScreen', arguments: {
+                "name": "Abhishek Singh",
+                "email": "abhishek@gmail.com"
+              });
             },
             child: const Text("Go To Second Screen"),
           )

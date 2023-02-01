@@ -5,17 +5,17 @@ class SecondScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final arguments =
-        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
-    var name = arguments['name']!;
-    var email = arguments['email']!;
+    // final arguments =
+    //     ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+    // var name = arguments['name']!;
+    // var email = arguments['email']!;
 
     return Scaffold(
       appBar: AppBar(
-        title:  Text(name),
+        title:  Text("name"),
       ),
       body:  Center(
-        child: Text(email),
+        child: Text("email"),
       ),
     );
   }
