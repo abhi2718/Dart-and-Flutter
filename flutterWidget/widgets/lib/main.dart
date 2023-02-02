@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import './button.dart';
 import './screens/second_screen.dart';
 import './screens/top_tab_screen.dart';
+import './screens/bottom_tab_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +35,8 @@ void main() {
       ),
       routes: {
         '/': (context) => const _App(),
-        '/secondScreen': (context) => const TopTabScreen()
+        '/secondScreen': (context) => const TopTabScreen(),
+        '/bottomTabScreen': (context) => const BottomTabBar(),
       },
       onGenerateRoute: (settings) {
         print(settings.arguments);
@@ -150,8 +152,10 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
             style: TextButton.styleFrom(
               foregroundColor: Colors.black,
             ),
-            onPressed: () {},
-            child: const Text("Text Button"),
+            onPressed: () {
+              Navigator.of(context).popAndPushNamed('/bottomTabScreen');
+            },
+            child: const Text("Show bottom tab  Screen and Drawer"),
           ),
           TextButton.icon(
             style: TextButton.styleFrom(
@@ -383,8 +387,10 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
-                  child: const Text("Elevated Button"),
+                  onPressed: () {
+                    
+                  },
+                  child: const Text("Show Bottom Tab Screen"),
                 ),
                 CupertinoButton(
                     color: Colors.black,
