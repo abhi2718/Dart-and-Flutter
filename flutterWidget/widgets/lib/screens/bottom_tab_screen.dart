@@ -49,7 +49,19 @@ class Screen1 extends StatelessWidget {
   const Screen1({super.key});
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("screen1"));
+    return (Column(
+      children: [
+        Center(
+          child: InkWell(
+            onTap: () {
+              var id = 34;
+              Navigator.of(context).pop(id);
+            },
+            child: const Text("Go Back"),
+          ),
+        )
+      ],
+    ));
   }
 }
 

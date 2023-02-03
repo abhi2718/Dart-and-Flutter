@@ -153,7 +153,9 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
               foregroundColor: Colors.black,
             ),
             onPressed: () {
-              Navigator.of(context).popAndPushNamed('/bottomTabScreen');
+              Navigator.of(context).pushNamed('/bottomTabScreen').then((value) {
+                print(value);
+              });
             },
             child: const Text("Show bottom tab  Screen and Drawer"),
           ),
@@ -387,9 +389,7 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    
-                  },
+                  onPressed: () {},
                   child: const Text("Show Bottom Tab Screen"),
                 ),
                 CupertinoButton(
