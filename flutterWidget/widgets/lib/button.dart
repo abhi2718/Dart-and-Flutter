@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import './providers/conter_provider.dart';
 
 class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -8,17 +10,20 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<CounterProvider>(context);
     return Container(
-       width: double.infinity,
-       padding: const EdgeInsets.all(16),
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Theme.of(context).primaryColorDark,
           foregroundColor: Colors.white,
-          padding:const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
         ),
-        onPressed: onPressed,
-        child: const Text("Elevated Button"),
+        onPressed: () {
+          provider.increase();
+        },
+        child: Text(' Count ${provider.count}'),
       ),
     );
   }

@@ -1014,3 +1014,28 @@ class Screen2 extends StatelessWidget {
     return const Center(child: Text("screen2"));
   }
 }
+
+
+# State Management by using provider package 
+
+import 'package:flutter/material.dart';
+
+class CounterProvider with ChangeNotifier {
+  var count = 0;
+
+  void increase() {
+    count = count + 1;
+    notifyListeners();
+  }
+}
+
+
+// Attaching our provider with widget
+ ChangeNotifierProvider(
+      create: (context) => CounterProvider(),
+      child: SingleChildScrollView()
+   );
+
+
+// Listener
+   var provider = Provider.of<CounterProvider>(context);
