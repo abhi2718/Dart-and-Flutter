@@ -10,20 +10,30 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<CounterProvider>(context);
+    // var provider = Provider.of<CounterProvider>(context);
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Theme.of(context).primaryColorDark,
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.all(16),
-        ),
-        onPressed: () {
-          provider.increase();
+      child: Consumer<CounterProvider>(
+        builder: (context, provider, child) {
+          return ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).primaryColorDark,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.all(16),
+            ),
+            onPressed: () {
+              provider.increase();
+            },
+            child: Column(
+              children: [
+                Text(' Count ${provider.count}'),
+                child!,
+              ],
+            ),
+          );
         },
-        child: Text(' Count ${provider.count}'),
+        child: const Text("I will not change "),
       ),
     );
   }

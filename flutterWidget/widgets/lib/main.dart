@@ -111,8 +111,12 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
     // print(MediaQuery.of(context).padding.top);
     // final appBarHeight = AppBar().preferredSize.height;
     // print(appBarHeight);
-    final body = ChangeNotifierProvider(
-      create: (context) => CounterProvider(),
+    final body = MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => CounterProvider(),
+        )
+      ],
       child: SingleChildScrollView(
         child: Column(
           children: [

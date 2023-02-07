@@ -1039,3 +1039,38 @@ class CounterProvider with ChangeNotifier {
 
 // Listener
    var provider = Provider.of<CounterProvider>(context);
+
+
+// Consumer Listener : -  The Consumer listener only rebuild the part of UI 
+//  which are its child while Provider.of<CounterProvider>(context) build whole build methods
+ Consumer<CounterProvider>(
+        builder: (context, provider, child) {
+          return ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).primaryColorDark,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.all(16),
+            ),
+            onPressed: () {
+              provider.increase();
+            },
+            child: Column(
+              children: [
+                Text(' Count ${provider.count}'),
+                child!,
+              ],
+            ),
+          );
+        },
+        child: const Text("I will not change "),
+      )
+
+// Using MultiProvider 
+MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => CounterProvider(),
+        )
+      ],
+      child: SingleChildScrollView()
+);
