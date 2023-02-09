@@ -8,6 +8,7 @@ import './screens/second_screen.dart';
 import './screens/top_tab_screen.dart';
 import './screens/bottom_tab_screen.dart';
 import './providers/conter_provider.dart';
+import './screens/form.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +40,7 @@ void main() {
         '/': (context) => const _App(),
         '/secondScreen': (context) => const TopTabScreen(),
         '/bottomTabScreen': (context) => const BottomTabBar(),
+        '/form': (context) => CustomForm(),
       },
       onGenerateRoute: (settings) {
         print(settings.arguments);
@@ -136,6 +138,12 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
                 style: Theme.of(context).textTheme.titleMedium,
                 textAlign: TextAlign.center,
               ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/form');
+              },
+              child: const Text("Flutter Form with validations"),
             ),
             CustomButton(
               () {},
