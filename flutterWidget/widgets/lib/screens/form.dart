@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-// 225 end 
+// 225 end
 
 class CustomForm extends StatefulWidget {
   const CustomForm({super.key});
@@ -12,12 +13,29 @@ class CustomForm extends StatefulWidget {
 class _CustomFormState extends State<CustomForm> {
   final _ageFocousNode = FocusNode();
   final _descriptionNode = FocusNode();
+  final _imageController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  final data = {"name": "", "age": 0, "description": "", "imgUrl": ""};
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
     _ageFocousNode.dispose();
     _descriptionNode.dispose();
     super.dispose();
+  }
+
+  void _saveForm() {
+    final isValid = _formKey.currentState?.validate();
+    if (!isValid!) {
+      return;
+    }
+    _formKey.currentState?.save();
   }
 
   @override
@@ -32,6 +50,7 @@ class _CustomFormState extends State<CustomForm> {
               height: 400,
               width: double.infinity,
               child: Form(
+                key: _formKey,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -47,6 +66,15 @@ class _CustomFormState extends State<CustomForm> {
                           //  print(value);
                           FocusScope.of(context).requestFocus(_ageFocousNode);
                         },
+                        onSaved: (newValue) {
+                          data["name"] = newValue!;
+                        },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Name is required"; // return some error message when there is some potential error
+                          }
+                          return null; // retun null when there is no error
+                        },
                       ),
                       TextFormField(
                         focusNode: _ageFocousNode,
@@ -58,6 +86,9 @@ class _CustomFormState extends State<CustomForm> {
                         onFieldSubmitted: (value) {
                           FocusScope.of(context).requestFocus(_descriptionNode);
                         },
+                        onSaved: (newValue) {
+                          data["age"] = newValue!;
+                        },
                       ),
 
                       // TextField For multi line input
@@ -68,7 +99,42 @@ class _CustomFormState extends State<CustomForm> {
                         ),
                         maxLines: 3,
                         keyboardType: TextInputType.multiline,
-                      )
+                        onSaved: (newValue) {
+                          data["description"] = newValue!;
+                        },
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 250,
+                            child: TextFormField(
+                              controller: _imageController,
+                              decoration:
+                                  const InputDecoration(labelText: "Image URL"),
+                              keyboardType: TextInputType.url,
+                              textInputAction: TextInputAction.done,
+                              onFieldSubmitted: (value) {
+                                setState(() {});
+                              },
+                              onSaved: (newValue) {
+                                data["imgUrl"] = newValue!;
+                              },
+                            ),
+                          ),
+                          _imageController.text.isEmpty
+                              ? const Text("Enter image URL")
+                              : SizedBox(
+                                  width: 60,
+                                  height: 60,
+                                  child: Image.network(
+                                    _imageController.text,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                        ],
+                      ),
+                      ElevatedButton(
+                          onPressed: _saveForm, child: const Text("Submit"))
                     ],
                   ),
                 ),
@@ -80,3 +146,4 @@ class _CustomFormState extends State<CustomForm> {
     );
   }
 }
+// 228
