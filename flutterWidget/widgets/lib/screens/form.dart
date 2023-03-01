@@ -38,12 +38,33 @@ class _CustomFormState extends State<CustomForm> {
     _formKey.currentState?.save();
   }
 
+  Future<dynamic> futureFunction() async {
+    await Future.delayed(Duration(seconds: 2));
+    return 98;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Custom Form")),
       body: Column(
         children: [
+          FutureBuilder(
+              future: futureFunction(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else if (snapshot.connectionState == ConnectionState.done ||
+                    snapshot.connectionState == ConnectionState.active) {
+                  if (snapshot.hasData) {
+                    return Text(snapshot.data.toString());
+                  } else {
+                    return Text("something went wrong!");
+                  }
+                } else {
+                  return Text("something went wrong!");
+                }
+              }),
           Padding(
             padding: const EdgeInsets.all(16),
             child: SizedBox(
