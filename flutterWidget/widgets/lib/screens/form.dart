@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
 // 225 end
 
 class CustomForm extends StatefulWidget {
@@ -39,8 +40,16 @@ class _CustomFormState extends State<CustomForm> {
   }
 
   Future<dynamic> futureFunction() async {
-    await Future.delayed(Duration(seconds: 2));
-    return 98;
+    var url =
+        Uri.https('www.googleapis.com', '/books/v1/volume', {'q': '{http}'});
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      var jsonResponse =
+          convert.jsonDecode(response.body) as Map<String, dynamic>;
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   @override
@@ -52,6 +61,7 @@ class _CustomFormState extends State<CustomForm> {
           FutureBuilder(
               future: futureFunction(),
               builder: (context, snapshot) {
+                print(snapshot.connectionState);
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
                 } else if (snapshot.connectionState == ConnectionState.done ||
@@ -59,10 +69,10 @@ class _CustomFormState extends State<CustomForm> {
                   if (snapshot.hasData) {
                     return Text(snapshot.data.toString());
                   } else {
-                    return Text("something went wrong!");
+                    return Text(snapshot.error.toString());
                   }
                 } else {
-                  return Text("something went wrong!");
+                  return Text("Something went wrong!");
                 }
               }),
           Padding(
